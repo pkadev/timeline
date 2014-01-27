@@ -32,10 +32,11 @@ if(isset($_GET['logout']))
 // ******************************************* //
 
 if (isset($_SESSION['login']) && $_SESSION['login'] == $hash) {
-
+    $_SESSION['username'] = $username;
     ?>
             
         <p>Hello <?php echo $username; ?>, you have successfully logged in!</p>
+        <a href="admin.php">Admin</a><br>
         <a href="?logout=true">Logout?</a>
             
     <?php
