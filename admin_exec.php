@@ -21,6 +21,7 @@ $sql_create_table_event = "CREATE TABLE " . TABLE_NAME__EVENT . "
                         date DATE NOT NULL,
                         type TINYTEXT NOT NULL,
                         text TEXT,
+                        img_url TEXT,
                         PRIMARY KEY (id)
 
                      )";
@@ -67,7 +68,6 @@ function dump_table($table_name)
 function create_table_event($sql_query)
 {
     $con = connect();
-
  
     if (mysql_query($sql_query, $con)) {
         echo "Table created<br />";

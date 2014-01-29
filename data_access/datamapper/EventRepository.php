@@ -17,19 +17,6 @@ class EventRepository
         }
     }
 
-    //public function ExistInDB($isin)
-    //{
-    //    $this->_mySQLAdapter->connect();
-
-    //    $this->_mySQLAdapter->select("stock", " isin='" . $isin . "'");
-
-    //    while($stocklistRow = $this->_mySQLAdapter->fetch())
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
     public function FindAll()
     {
         $this->_mySQLAdapter->connect();
@@ -40,7 +27,7 @@ class EventRepository
         {
             array_push($obj, new Event($stocksRow[entity], $stocksRow[header],
                              $stocksRow[date], $stocksRow[type], $stocksRow[text],
-                             $stocksRow[id]));
+                             $stocksRow[id], $stocksRow[img_url]));
         }
 
         return $obj;
@@ -52,7 +39,7 @@ class EventRepository
         $stocksRow = $this->_mySQLAdapter->fetch();
         $obj = new Event($stocksRow[entity], $stocksRow[header],
                          $stocksRow[date], $stocksRow[type], $stocksRow[text],
-                         $stocksRow[id]);
+                         $stocksRow[id], $stocksRow[img_url]);
         return $obj;
     }
 
@@ -83,6 +70,7 @@ class EventRepository
                       date => $event->_start_date,
                       type => $event->_type,
                       text => $event->_text,
+                      img_url => $event->_img_url,
                         ); 
 
         $this->_mySQLAdapter->connect();
