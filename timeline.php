@@ -3,6 +3,7 @@
 class Timeline
 {
     public $_events = array();
+    public $_event_repo;
     protected $_name;
     protected $_calendar;
 
@@ -10,19 +11,17 @@ class Timeline
     {
         $this->_name = $name;
         $this->_calendar = $calendar;
-    }
-
-    public function add(Event $event)
-    {
-        array_push($this->_events, $event);
+        $this->_event_repo = new EventRepository();
+        $this->_events = $this->_event_repo->FindAll();
     }
 
     public function calendar_draw()
     {
-        $this->_calendar->draw_header($this->get_first_date(), 
-                                     $this->get_last_date(),
+        $this->_calendar->draw_header($this->_event_repo->GetNewest(), 
+                                     $this->_event_repo->GetOldest(),
                                      $this->_name,
                                      $this->_events);
+        
     }
     public function get_last_date()
     {
